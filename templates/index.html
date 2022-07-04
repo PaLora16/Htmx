@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+  <!-- HTMX -->
+  <script src="https://unpkg.com/htmx.org@1.5.0"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>FastApi HTMX</title>
+</head>
+
+<body>
+
+  <script>
+    $(document).ready(function () {
+      $('#btn_submit').on('click', function () {
+        $(this).hide(1000);
+      });
+    });
+  </script>
+
+  <div class="container">
+    <h1>FastApi HTMX</h1>
+
+    <div class='col-6'>
+      <form class="form-inline" hx-post="/run/">
+        <div class="form-group mx-sm-3 mb-2">
+          <input type="text" class="form-control" name="text_to_animate">
+        </div>
+        <div class="col text-center">
+          <button id="btn_submit" class="btn btn-primary mb-2 centre">Start animating</button>
+        </div>
+      </form>
+    </div>
+
+    <div hx-sse="connect:/event_source">
+      <h2>
+        <span hx-sse="swap:animated"></span>
+      </h2>
+    </div>
+  </div>
+
+</body>
+
+</html>
